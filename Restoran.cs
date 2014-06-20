@@ -7,27 +7,27 @@ using System.Threading;
 
 namespace Restaurant
 {
-    class Restoran : Eats
-    {
-        List<Waiter> waiters;
-		int waiterId = 0;
-        static Random rnd;
+	class Restoran : Eats
+	{
+		List<Waiter> waiters;
+		static Random rnd;
 
-        IDisplayable display;
+		IDisplayable display;
 
-		public Restoran(int numOfCooks, int numOfWaiters, IRepository db) : base(numOfCooks, db)
+		public Restoran(int numOfCooks, int numOfWaiters, IRepository db)
+			: base(numOfCooks, db)
 		{
-            display = new ConsoleDisplayable();
-            rnd = new Random();
+			display = new ConsoleDisplayable();
+			rnd = new Random();
 			waiters = new List<Waiter>();
 
-            AddCooks(numOfCooks);
+			AddCooks(numOfCooks);
 
 			AddWaiters(numOfWaiters);
 		}
 
-        public void ShowDishes()
-        {
+		public void ShowDishes()
+		{
 			if (dishes != null)
 			{
 				foreach (Dish d in dishes)
@@ -39,108 +39,108 @@ namespace Restaurant
 			{
 				Console.WriteLine("Список блюд пуст!");
 			}
-        }
+		}
 
 		public void Service()
 		{
-            while (true)
-            {
-                AddClient();
+			while (true)
+			{
+				AddClient();
 
-                Thread.Sleep(500);
-            }
+				Thread.Sleep(500);
+			}
 		}
-        
-        public void TakeOrder(Order order)
-        {
-            bool found=false;
-            while(!found)
-           {
-                    for(int i=0; i<waiters.Count;i++)
-                    {
-                        if(!waiters[i].Busy)
-                        {
-                            waiters[i].TakeOrder(order);
-                            found=true;
-                            break;
-                        }
-                    }
-                    Thread.Sleep(1000);
-           }   
-        }
-        public void Restoran_ToCook(Order order)
-        {
-            bool found=false;
-            while(!found)
-           {
-                    //waiter1= waiters[rnd.Next(0, waiters.Count-1)];
-                    for(int i=0; i<cooks.Count;i++)
-                    {
-                        if(!cooks[i].Busy)
-                        {
-                            cooks[i].MakeDish(order);
-                            found = true;
-                            break;
-                        }
-                    }
-                    Thread.Sleep(1000);
-           }   
-        }
 
-        public void Restoran_Finished(Order order)
-        {
-            order.waiter.GiveDishToClient(order.client);
-        }
+		public void TakeOrder(Order order)
+		{
+			bool found = false;
+			while (!found)
+			{
+				for (int i = 0; i < waiters.Count; i++)
+				{
+					if (!waiters[i].Busy)
+					{
+						waiters[i].TakeOrder(order);
+						found = true;
+						break;
+					}
+				}
+				Thread.Sleep(1000);
+			}
+		}
+		public void Restoran_ToCook(Order order)
+		{
+			bool found = false;
+			while (!found)
+			{
+				//waiter1= waiters[rnd.Next(0, waiters.Count-1)];
+				for (int i = 0; i < cooks.Count; i++)
+				{
+					if (!cooks[i].Busy)
+					{
+						cooks[i].MakeDish(order);
+						found = true;
+						break;
+					}
+				}
+				Thread.Sleep(1000);
+			}
+		}
 
-        public void client_Paid(Client client)
-        {
-            RemoveClient(client);
-        }
+		public void Restoran_Finished(Order order)
+		{
+			order.waiter.GiveDishToClient(order.client);
+		}
+
+		public void client_Paid(Client client)
+		{
+			RemoveClient(client);
+		}
 
 		private void AddWaiters(int n)
 		{
 			for (int i = 0; i < n; i++)
 			{
-                Waiter waiter = new Waiter();
-                waiter.ToCook += Restoran_ToCook; 
-                waiters.Add(waiter);
+				Waiter waiter = new Waiter();
+				waiter.ToCook += Restoran_ToCook;
+				waiters.Add(waiter);
 			}
 		}
 
-        private void AddCooks(int n)
-        {
-            for (int i = 0; i < n; i++)
-            {
-                Cook c = new Cook(display);
-                c.Finished += Restoran_Finished;
-                cooks.Add(c);
-                
-            }
-        }
+		private void AddCooks(int n)
+		{
+			for (int i = 0; i < n; i++)
+			{
+				Cook c = new Cook(display);
+				c.Finished += Restoran_Finished;
+				cooks.Add(c);
 
-        protected internal void AddClient()
-        {
-            Client client = new Client();
-            clients.Add(client);
+			}
+		}
 
-            Console.WriteLine("Пришел клиент: № {0}", client.Id);
-            client.Ordered += TakeOrder;
-            client.Paid += client_Paid;
-            client.Order(dishes);
-        }
+		protected internal void AddClient()
+		{
+			Client client = new Client();
+			clients.Add(client);
 
-        protected internal void RemoveClient(Client client)
-        {
-            Console.WriteLine("Ушел клиент: № {0}", client.Id);
-            clients.Remove(client);
-        }
+			Console.WriteLine("Пришел клиент: № {0}", client.Id);
+			client.Ordered += TakeOrder;
+			client.Paid += client_Paid;
+			client.Order(dishes);
+		}
 
-    }
+		protected internal void RemoveClient(Client client)
+		{
+			Console.WriteLine("Ушел клиент: № {0}", client.Id);
+			clients.Remove(client);
+		}
 
-    abstract class Eats
-    {
+	}
+
+	abstract class Eats
+	{
 		protected List<Client> clients;
-        protected IEnumerable<Dish> dishes;
+		protected IEnumerable<Dish> dishes;
 		protected List<Cook> cooks;
 		IRepository db;
 
@@ -150,7 +150,7 @@ namespace Restaurant
 			cooks = new List<Cook>();
 			this.db = db;
 			dishes = GetDishes(db);
-			
+
 		}
 
 		/// <summary>
@@ -158,11 +158,11 @@ namespace Restaurant
 		/// </summary>
 		/// <param name="db"></param>
 		/// <returns>Меню</returns>
-        public IEnumerable<Dish> GetDishes(IRepository db)
-        {
+		public IEnumerable<Dish> GetDishes(IRepository db)
+		{
 			this.db = db;
-            return db.GetDishes();
-        }
+			return db.GetDishes();
+		}
 
 		/// <summary>
 		/// Обновить меню из хранилища
@@ -171,8 +171,8 @@ namespace Restaurant
 		{
 			dishes = db.GetDishes();
 		}
-	
-    }
+
+	}
 
 
 }

@@ -38,6 +38,8 @@ namespace Restaurant
             DishReady = true;
             Console.WriteLine("Повар {0} - еда для клиента {1} готова", Id, order.client.Id);
             Finished(order);
+			Busy = false;
+			DishReady = false;
         }
 
 

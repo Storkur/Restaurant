@@ -48,25 +48,10 @@ namespace Restaurant
             Console.WriteLine("Официант {0} принял заказ у клиента {1}: {2}", Id, order.client.Id, order.dish.Name);
             ToCook(order);
             Thread.Sleep(500);
+			Busy = false;
         }
 
-        // взять заказ и отнести повару
-        //public void TakeOrder(List<Client> clients, IEnumerable<Dish> dishes, List<Cook> cooks)
-        //{
-        //    foreach (Client client in clients)
-        //    {
-        //        if (client.WaitingOrder)
-        //        {
-        //            client.Order(dishes);
-        //            CurrentClient = client;
-        //            Busy = true;
-        //            Console.WriteLine("Официант {0} принял заказ у клиента {1}: {2}", Id, CurrentClient.Id, CurrentClient.SelectedDish.Name);
-        //            SendOrderToKitchen(cooks);
-        //            Thread.Sleep(500);
-        //            break;
-        //        }
-        //    }			
-        //}
+   
 
         // отнести блюдо клиенту
         public void GiveDishToClient(Client client)
@@ -80,38 +65,5 @@ namespace Restaurant
 			Busy = false;
 			CarringDish = false;
 		}
-
-        public void SendOrderToKitchen()
-        {
-
-            //foreach (Cook cook in cooks)
-            //{
-            //    if (!cook.Busy)
-            //    {
-            //        Console.WriteLine("Официант {0} передает заказ от клиента {1} повару {2}", Id, CurrentClient.Id, cook.Id);
-            //        cook.MakeDish(CurrentClient);
-            //        this.Busy = false;
-            //        return;
-            //    }
-            //}
-            //Console.WriteLine("Официант {0} - нет свободных поваров!", Id);
-            //Thread.Sleep(500);
-        }
-
-        //public void SendOrderToKitchen(List<Cook> cooks)
-        //{
-        //    foreach (Cook cook in cooks)
-        //        {
-        //            if (!cook.Busy)
-        //            {
-        //                Console.WriteLine("Официант {0} передает заказ от клиента {1} повару {2}", Id, CurrentClient.Id, cook.Id);
-        //                cook.MakeDish(CurrentClient);
-        //                this.Busy = false;
-        //                return;
-        //            }
-        //        }
-        //        Console.WriteLine("Официант {0} - нет свободных поваров!", Id);
-        //        Thread.Sleep(500);
-        //}
 	}
 }
