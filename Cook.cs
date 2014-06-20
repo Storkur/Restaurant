@@ -17,23 +17,9 @@ namespace Restaurant
         public delegate void CookHandler(Order order);
         public event CookHandler Finished;
 
-		bool busy;
-		public bool Busy
-		{
-			get
-			{
-				return busy;
-			}
-			private set
-			{
-				if (value == false)
-				{ CurrentClient = null; }
-				busy = value;
-			}
-		}
+		public bool Busy {get; set;}
+
 		public bool DishReady { get; private set; }
-		public string Name { get; set; }
-		public Client CurrentClient { get; private set; }
 
 		public Cook(IDisplayable disp)
 		{
