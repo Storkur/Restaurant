@@ -37,7 +37,7 @@ namespace RestaurantLib
             Thread.Sleep(500);
             DishReady = true;
             Console.WriteLine("Повар {0} - еда для клиента {1} готова", Id, order.client.Id);
-            Finished(order);
+            Finished.BeginInvoke(order, null, null);
 			Busy = false;
 			DishReady = false;
         }

@@ -46,7 +46,7 @@ namespace RestaurantLib
             order.waiter = this;
             Busy = true;
             Console.WriteLine("Официант {0} принял заказ у клиента {1}: {2}", Id, order.client.Id, order.dish.Name);
-            ToCook(order);
+            ToCook.BeginInvoke(order, null, null);
             Thread.Sleep(500);
 			Busy = false;
         }

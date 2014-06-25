@@ -48,7 +48,7 @@ namespace RestaurantLib
         public void Pay(decimal sum)
         {
 			Console.WriteLine("Клиент {0} доволен и платит {1}", Id, sum);
-            Paid(this);
+            Paid.BeginInvoke(this, null, null);
 		}
 
 	}

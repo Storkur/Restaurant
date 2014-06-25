@@ -51,7 +51,7 @@ namespace RestaurantLib
 				AddClient();
 
 				display.Show("------------------Пауза------------------------------");
-				Thread.Sleep(20000);
+				Thread.Sleep(2000);
 			}
 		}
 
