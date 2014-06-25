@@ -12,12 +12,12 @@ namespace Restaurant
         static void Main(string[] args)
         {
             Restoran restoran = new Restoran(2, 3, new ListRepository());
-            //restoran.ShowDishes();
+            restoran.ShowDishes();
 
 			
 
 			//Запуск работы ресторана
-			//restoran.Service();
+			restoran.Service();
 
             
 

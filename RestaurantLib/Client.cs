@@ -36,7 +36,7 @@ namespace RestaurantLib
 			SelectedDish = dishes.ElementAt(dishNum);
 			Console.WriteLine("Клиент № {0} выбрал блюдо {1} \t {2}", Id, SelectedDish.Name, SelectedDish.Price);
 			WaitingOrder = false;
-            Ordered(new Order { client = this, dish = SelectedDish });
+            Ordered.BeginInvoke(new Order { client = this, dish = SelectedDish }, null, null);
 			
 		}
         public void Eat()

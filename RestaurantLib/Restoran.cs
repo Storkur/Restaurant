@@ -45,10 +45,13 @@ namespace RestaurantLib
 		{
 			while (true)
 			{
+				
+				AddClient();
+				AddClient();
 				AddClient();
 
-
-				Thread.Sleep(500);
+				display.Show("------------------Пауза------------------------------");
+				Thread.Sleep(20000);
 			}
 		}
 
