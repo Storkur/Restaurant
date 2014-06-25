@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurant
+namespace RestaurantLib
 {
-    class ListRepository : IRepository
+   public class ListRepository : IRepository
     {
         private List<Dish> dishes;
 

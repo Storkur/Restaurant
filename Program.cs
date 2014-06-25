@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestaurantLib;
 
 namespace Restaurant
 {
@@ -11,12 +12,14 @@ namespace Restaurant
         static void Main(string[] args)
         {
             Restoran restoran = new Restoran(2, 3, new ListRepository());
-            restoran.ShowDishes();
+            //restoran.ShowDishes();
 
 			
 
 			//Запуск работы ресторана
-			restoran.Service();
+			//restoran.Service();
+
+            
 
             Console.ReadLine();
         }

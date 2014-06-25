@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurant
+namespace RestaurantLib
 {
-    interface IDisplayable
+    public interface IDisplayable
     {
         void Show(string data);
     }

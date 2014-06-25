@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Restaurant
+namespace RestaurantLib
 {
-	class Cook
+	public class Cook
 	{
         private static int id=0;
 		public int Id { get; private set; }

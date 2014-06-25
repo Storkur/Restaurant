@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Restaurant
+namespace RestaurantLib
 {
-	class Restoran : Eats
+	public class Restoran : Eats
 	{
 		List<Waiter> waiters;
 		static Random rnd;
@@ -46,6 +46,7 @@ namespace Restaurant
 			while (true)
 			{
 				AddClient();
+
 
 				Thread.Sleep(500);
 			}
@@ -118,7 +119,7 @@ namespace Restaurant
 			}
 		}
 
-		protected internal void AddClient()
+		public void AddClient()
 		{
 			Client client = new Client();
 			clients.Add(client);
@@ -129,7 +130,7 @@ namespace Restaurant
 			client.Order(dishes);
 		}
 
-		protected internal void RemoveClient(Client client)
+		public void RemoveClient(Client client)
 		{
 			Console.WriteLine("Ушел клиент: № {0}", client.Id);
 			clients.Remove(client);
@@ -137,7 +138,7 @@ namespace Restaurant
 
 	}
 
-	abstract class Eats
+	public abstract class Eats
 	{
 		protected List<Client> clients;
 		protected IEnumerable<Dish> dishes;
@@ -150,6 +151,7 @@ namespace Restaurant
 			cooks = new List<Cook>();
 			this.db = db;
 			dishes = GetDishes(db);
+			db.Save();
 
 		}
 

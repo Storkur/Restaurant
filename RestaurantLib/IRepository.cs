@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurant
+namespace RestaurantLib
 {
-    interface IRepository
+    public interface IRepository
     {
         IEnumerable<Dish> GetDishes();
         void Add(Dish dish);
