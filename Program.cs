@@ -11,7 +11,7 @@ namespace Restaurant
     {
         static void Main(string[] args)
         {
-            Restoran restoran = new Restoran(5, 5, new ListRepository());
+            Restoran restoran = new Restoran(3, 3, new ListRepository());
             restoran.ShowDishes();
 
 			

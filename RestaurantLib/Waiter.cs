@@ -47,7 +47,7 @@ namespace RestaurantLib
             Busy = true;
             Console.WriteLine("Официант {0} принял заказ у клиента {1}: {2}", Id, order.client.Id, order.dish.Name);
             ToCook.BeginInvoke(order, null, null);
-            Thread.Sleep(500);
+            Thread.Sleep(WaitTime.ToTakeOrder);
 			Busy = false;
         }
 
@@ -60,7 +60,7 @@ namespace RestaurantLib
 			CarringDish = true;
 			CurrentClient = client;
 			Console.WriteLine("Официант {0} передает готовое блюдо клиенту {1}", Id, client.Id);
-			Thread.Sleep(500);
+			Thread.Sleep(WaitTime.GiveDishToClient);
 			client.Eat();
 			Busy = false;
 			CarringDish = false;

@@ -9,6 +9,8 @@ namespace RestaurantLib
 {
 	public class Restoran : Eats
 	{
+		private int timeBetweenClients = 2000;
+
 		List<Waiter> waiters;
 		static Random rnd;
 
@@ -43,15 +45,17 @@ namespace RestaurantLib
 
 		public void Service()
 		{
-			while (true)
+			int i = 0;
+			while (i < 30)  //Для отладки
 			{
-				
+				i++;
+				AddClient();
 				AddClient();
 				AddClient();
 				AddClient();
 
 				display.Show("------------------Пауза------------------------------");
-				Thread.Sleep(2000);
+				Thread.Sleep(WaitTime.BetweenClients);
 			}
 		}
 
@@ -69,7 +73,6 @@ namespace RestaurantLib
 						break;
 					}
 				}
-				Thread.Sleep(1000);
 			}
 		}
 		public void Restoran_ToCook(Order order)
@@ -87,7 +90,6 @@ namespace RestaurantLib
 						break;
 					}
 				}
-				Thread.Sleep(1000);
 			}
 		}
 

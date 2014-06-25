@@ -42,7 +42,7 @@ namespace RestaurantLib
         public void Eat()
         {
 			Console.WriteLine("Клиент {0} есть", Id);
-			Thread.Sleep(500);
+			Thread.Sleep(WaitTime.ToEat);
 			Pay(SelectedDish.Price);
 		}
         public void Pay(decimal sum)
