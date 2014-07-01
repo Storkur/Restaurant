@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace RestaurantLib
 {
-	public class Cook
+	public class Cook : IDisplayable
 	{
         private static int id=0;
 		public int Id { get; private set; }
-
-        IDisplayable display;
+		public IDisplay Display { get; set; }
 
         public delegate void CookHandler(Order order);
         public event CookHandler Finished;
@@ -21,9 +20,9 @@ namespace RestaurantLib
 
 		public bool DishReady { get; private set; }
 
-		public Cook(IDisplayable disp)
+		public Cook(IDisplay disp)
 		{
-            display = new ConsoleDisplayable();
+            Display = disp;
 			Id = ++id;
 			Busy = false;
 			DishReady = false;
@@ -36,7 +35,7 @@ namespace RestaurantLib
             order.cook = this;
             Thread.Sleep(WaitTime.MakeDish);
             DishReady = true;
-            Console.WriteLine("Повар {0} - еда для клиента {1} готова", Id, order.client.Id);
+            Display.Show(String.Format("Повар {0} - еда для клиента {1} готова", Id, order.client.Id));
             Finished.BeginInvoke(order, null, null);
 			Busy = false;
 			DishReady = false;

@@ -12,6 +12,7 @@ namespace Restaurant
         static void Main(string[] args)
         {			
 			BinaryFileRepository binFileRep = new BinaryFileRepository(@"C:\tmp\test.bin");
+			binFileRep.Save();
 
 			Restoran restoran = new Restoran(3, 3, binFileRep);
             restoran.ShowDishes();

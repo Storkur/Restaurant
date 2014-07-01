@@ -7,19 +7,19 @@ using System.Threading;
 
 namespace RestaurantLib
 {
-	public class Restoran : Eats
+	public class Restoran : Eats, IDisplayable
 	{
 		private int timeBetweenClients = 2000;
 
 		List<Waiter> waiters;
 		static Random rnd;
 
-		IDisplayable display;
+		public IDisplay Display { get; set; }
 
 		public Restoran(int numOfCooks, int numOfWaiters, IRepository db)
 			: base(numOfCooks, db)
 		{
-			display = new ConsoleDisplayable();
+			Display = new FileLog();
 			rnd = new Random();
 			waiters = new List<Waiter>();
 
@@ -34,12 +34,12 @@ namespace RestaurantLib
 			{
 				foreach (Dish d in dishes)
 				{
-					Console.WriteLine("Название: {0} -  Цена: {1}", d.Name, d.Price);
+					Display.Show(String.Format("Название: {0} -  Цена: {1}", d.Name, d.Price));
 				}
 			}
 			else
 			{
-				Console.WriteLine("Список блюд пуст!");
+				Display.Show(String.Format("Список блюд пуст!"));
 			}
 		}
 
@@ -54,7 +54,7 @@ namespace RestaurantLib
 				AddClient();
 				AddClient();
 
-				display.Show("------------------Пауза------------------------------");
+				Display.Show("------------------Пауза------------------------------");
 				Thread.Sleep(WaitTime.BetweenClients);
 			}
 		}
@@ -107,7 +107,7 @@ namespace RestaurantLib
 		{
 			for (int i = 0; i < n; i++)
 			{
-				Waiter waiter = new Waiter();
+				Waiter waiter = new Waiter(Display);
 				waiter.ToCook += Restoran_ToCook;
 				waiters.Add(waiter);
 			}
@@ -117,7 +117,7 @@ namespace RestaurantLib
 		{
 			for (int i = 0; i < n; i++)
 			{
-				Cook c = new Cook(display);
+				Cook c = new Cook(Display);
 				c.Finished += Restoran_Finished;
 				cooks.Add(c);
 
@@ -126,10 +126,10 @@ namespace RestaurantLib
 
 		public void AddClient()
 		{
-			Client client = new Client();
+			Client client = new Client(Display);
 			clients.Add(client);
 
-			Console.WriteLine("Пришел клиент: № {0}", client.Id);
+			Display.Show(String.Format("Пришел клиент: № {0}", client.Id));
 			client.Ordered += TakeOrder;
 			client.Paid += client_Paid;
 			client.Order(dishes);
@@ -137,10 +137,9 @@ namespace RestaurantLib
 
 		public void RemoveClient(Client client)
 		{
-			Console.WriteLine("Ушел клиент: № {0}", client.Id);
+			Display.Show(String.Format("Ушел клиент: № {0}", client.Id));
 			clients.Remove(client);
 		}
-
 	}
 
 	public abstract class Eats

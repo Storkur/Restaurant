@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace RestaurantLib
 {
-    public class Waiter
+    public class Waiter : IDisplayable
     {
         static int id = 0;
 		public int Id { get; private set; }
+		public IDisplay Display { get; set; }
 
         public delegate void WaiterHandler(Order order);
         public event WaiterHandler ToCook;
@@ -34,18 +35,19 @@ namespace RestaurantLib
 		public bool CarringDish{ get; private set; }
 
 
-		public Waiter()
+		public Waiter(IDisplay disp)
 		{
 			Busy = false;
 			CarringDish = false;
 			Id = ++id;
+			Display = disp;
 		}
 
         public void TakeOrder(Order order)
         {
             order.waiter = this;
             Busy = true;
-            Console.WriteLine("Официант {0} принял заказ у клиента {1}: {2}", Id, order.client.Id, order.dish.Name);
+            Display.Show(String.Format("Официант {0} принял заказ у клиента {1}: {2}", Id, order.client.Id, order.dish.Name));
             ToCook.BeginInvoke(order, null, null);
             Thread.Sleep(WaitTime.ToTakeOrder);
 			Busy = false;
@@ -59,7 +61,7 @@ namespace RestaurantLib
 			Busy = true;
 			CarringDish = true;
 			CurrentClient = client;
-			Console.WriteLine("Официант {0} передает готовое блюдо клиенту {1}", Id, client.Id);
+			Display.Show(String.Format("Официант {0} передает готовое блюдо клиенту {1}", Id, client.Id));
 			Thread.Sleep(WaitTime.GiveDishToClient);
 			client.Eat();
 			Busy = false;

@@ -40,13 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryFileRepository.cs" />
+    <Compile Include="IDisplayable.cs" />
     <Compile Include="WaitTime.cs" />
     <Compile Include="XmlRepository.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Cook.cs" />
     <Compile Include="Dish.cs" />
     <Compile Include="BinaryRepository.cs" />
-    <Compile Include="IDisplayable.cs" />
+    <Compile Include="IDisplay.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ListRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

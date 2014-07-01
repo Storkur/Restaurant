@@ -1,0 +1,4 @@
+1. Переименовал интерфейс IDisplayable в IDisplay
+2. Добавил интерфейс IDisplayable
+3. Добавил класс BinaryFileRepository, который сохраняет меню в файл
+4. Сделал что бы весь текст выводился через IDisplay

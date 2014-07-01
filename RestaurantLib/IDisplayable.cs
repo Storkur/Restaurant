@@ -6,17 +6,8 @@ using System.Threading.Tasks;
 
 namespace RestaurantLib
 {
-    public interface IDisplayable
-    {
-        void Show(string data);
-    }
-
-    class ConsoleDisplayable : IDisplayable
-    {
-
-        public void Show(string data)
-        {
-            Console.WriteLine(data);
-        }
-    }
+	interface IDisplayable
+	{
+		IDisplay Display {get; set;}
+	}
 }
