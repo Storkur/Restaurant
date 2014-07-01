@@ -56,6 +56,12 @@ namespace RestaurantLib
 				xmlSerializer.Serialize(fStream, dishes);
             }
 		}
+
+
+		public void Add(IEnumerable<Dish> dishes)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
     

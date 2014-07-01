@@ -10,6 +10,7 @@ namespace RestaurantLib
     {
         IEnumerable<Dish> GetDishes();
         void Add(Dish dish);
+		void Add(IEnumerable<Dish> dishes);
         void Delete(Dish dish);
         void Edit(Dish dish);
         void Save();

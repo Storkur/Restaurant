@@ -10,8 +10,10 @@ namespace Restaurant
     class Program
     {
         static void Main(string[] args)
-        {
-            Restoran restoran = new Restoran(3, 3, new ListRepository());
+        {			
+			BinaryFileRepository binFileRep = new BinaryFileRepository(@"C:\tmp\test.bin");
+
+			Restoran restoran = new Restoran(3, 3, binFileRep);
             restoran.ShowDishes();
 
 			

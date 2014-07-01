@@ -51,5 +51,11 @@ namespace RestaurantLib
 
         public void Save()
         { }
-    }
+
+
+		public void Add(IEnumerable<Dish> dishes)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
