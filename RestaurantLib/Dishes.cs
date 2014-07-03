@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantLib
 {
-	class Dishes : IEnumerable
+	public class Dishes : IEnumerable<Dish>
 	{
 		private List<Dish> dishes = new List<Dish>();
 
@@ -16,7 +16,28 @@ namespace RestaurantLib
 			get { return dishes[index]; }
 			set { dishes[index] = value; }
 		}
-		public IEnumerator GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return dishes.GetEnumerator();
+		}
+
+		public void Add(Dish dish)
+		{
+			dishes.Add(dish);
+		}
+
+		public void Remove (Dish dish)
+		{
+			dishes.Remove(dish);
+		}
+
+		public void Edit(Dish dish)
+		{
+			Dish oldDish = dishes.Find(d => d.Name == dish.Name);
+			oldDish = dish;
+		}
+
+		IEnumerator<Dish> IEnumerable<Dish>.GetEnumerator()
 		{
 			return dishes.GetEnumerator();
 		}

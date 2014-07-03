@@ -12,7 +12,7 @@ namespace RestaurantLib
         void Show(string data);
     }
 
-    class ConsoleDisplayable : IDisplay
+    public class ConsoleDisplayable : IDisplay
     {
 
         public void Show(string data)
@@ -21,7 +21,7 @@ namespace RestaurantLib
         }
     }
 
-	class FileLog : IDisplay
+	public class FileLog : IDisplay
 	{
 		private static object locker = new object();
 

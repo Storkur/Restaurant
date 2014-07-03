@@ -8,12 +8,12 @@ namespace RestaurantLib
 {
    public class ListRepository : IRepository
     {
-        private List<Dish> dishes;
+        private Dishes dishes;
 
 
         public ListRepository()
         {
-            dishes = new List<Dish>();
+            dishes = new Dishes();
             dishes.Add(new Dish("Пицца", 12.77m));
 			dishes.Add(new Dish("Салат", 5.5m));
 			dishes.Add(new Dish("Булочка", 4.35m));
@@ -30,7 +30,7 @@ namespace RestaurantLib
 
         public IEnumerable<Dish> GetDishes()
         {
-            return dishes;
+			return (IEnumerable<Dish>)dishes;
         }
 
         public void Add(Dish dish)
@@ -45,8 +45,7 @@ namespace RestaurantLib
 
         public void Edit(Dish dish)
         {
-           Dish oldDish = dishes.Find(d => d.Name == dish.Name);
-           oldDish = dish;
+			dishes.Edit(dish);
         }
 
         public void Save()
