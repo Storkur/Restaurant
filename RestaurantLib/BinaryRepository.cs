@@ -13,20 +13,20 @@ namespace RestaurantLib
 	{
 		private string fileName;
         BinaryFormatter bf;
-        private List<Dish> dishes;
+        private Dishes dishes;
 
 		public BinaryRepository(string fileName)
         {
             this.fileName = fileName;
             bf = new BinaryFormatter();
-            dishes = new List<Dish>();
+            dishes = new Dishes();
 		}
 
 		public void OpenFile()
 		{
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                dishes = (List<Dish>)bf.Deserialize(fs);
+                dishes = (Dishes)bf.Deserialize(fs);
             }
 		}
 

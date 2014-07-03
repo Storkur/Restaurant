@@ -26,6 +26,11 @@ namespace RestaurantLib
 			dishes.Add(dish);
 		}
 
+		public void AddRange(IEnumerable<Dish> dishes)
+		{
+			this.dishes.AddRange(dishes);
+		}
+
 		public void Remove (Dish dish)
 		{
 			dishes.Remove(dish);

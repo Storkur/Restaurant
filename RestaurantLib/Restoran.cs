@@ -45,6 +45,11 @@ namespace RestaurantLib
 
 		public void Service()
 		{
+			if (!dishes.Any())
+			{
+				Console.WriteLine("Пустое меню! Обслуживание клиентов невозможно!");
+				return;
+			}
 			int i = 0;
 			while (i < 30)  //Для отладки
 			{
@@ -155,6 +160,10 @@ namespace RestaurantLib
 			cooks = new List<Cook>();
 			this.db = db;
 			dishes = GetDishes(db);
+			if (!dishes.Any())
+			{
+				Console.WriteLine("Пустое меню!");
+			}
 			db.Save();
 
 		}

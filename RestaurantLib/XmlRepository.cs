@@ -12,20 +12,20 @@ namespace RestaurantLib
 	{
 		private string fileName;
         XmlSerializer xmlSerializer;
-        private List<Dish> dishes;
+        private Dishes dishes;
 
 		public XmlRepository(string fileName)
         {
             this.fileName = fileName;
 			xmlSerializer = new XmlSerializer(typeof(List<Dish>));
-            dishes = new List<Dish>();
+			dishes = new Dishes();
 		}
 
 		public void OpenFile()
 		{
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-				dishes = (List<Dish>)xmlSerializer.Deserialize(fs);
+				dishes = (Dishes)xmlSerializer.Deserialize(fs);
             }
 		}
 
