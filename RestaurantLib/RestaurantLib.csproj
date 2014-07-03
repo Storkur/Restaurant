@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryFileRepository.cs" />
+    <Compile Include="Dishes.cs" />
     <Compile Include="IDisplayable.cs" />
     <Compile Include="WaitTime.cs" />
     <Compile Include="XmlRepository.cs" />
