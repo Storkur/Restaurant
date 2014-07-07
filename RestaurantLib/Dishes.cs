@@ -16,10 +16,12 @@ namespace RestaurantLib
 			get { return dishes[index]; }
 			set { dishes[index] = value; }
 		}
+
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return dishes.GetEnumerator();
 		}
+        
 
 		public void Add(Dish dish)
 		{
@@ -42,9 +44,17 @@ namespace RestaurantLib
 			oldDish = dish;
 		}
 
-		IEnumerator<Dish> IEnumerable<Dish>.GetEnumerator()
-		{
-			return dishes.GetEnumerator();
-		}
+        IEnumerator<Dish> IEnumerable<Dish>.GetEnumerator()
+        {
+            return dishes.GetEnumerator();
+        }
+
+        public IEnumerable<Dish> GetDishes()
+        {
+            for (int i = 0; i < dishes.Count(); i++)
+            {
+                yield return dishes[i];
+            }
+        }
 	}
 }
