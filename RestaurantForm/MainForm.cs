@@ -12,7 +12,7 @@ using RestaurantLib;
 
 namespace RestaurantForm
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         int currentDish;
         //BinaryRepository fileRepo;
@@ -20,7 +20,7 @@ namespace RestaurantForm
 
         List<Dish> selectedDishes;
 
-        public Form1()
+        public MainForm()
         {
          
             InitializeComponent();
