@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace RestaurantLib
 {
@@ -18,6 +19,15 @@ namespace RestaurantLib
         public void Show(string data)
         {
             Console.WriteLine(data);
+        }
+    }
+
+    public class WindowsFormsDisplayable : IDisplay
+    {
+
+        public void Show(string data)
+        {
+            MessageBox.Show(data);
         }
     }
 

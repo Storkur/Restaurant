@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using RestaurantLib;
 
@@ -15,7 +16,7 @@ namespace RestaurantForm
     {
         int currentDish;
         //BinaryRepository fileRepo;
-		IRepository fileRepo;
+		private IRepository fileRepo;
 
         List<Dish> selectedDishes;
 
@@ -25,7 +26,7 @@ namespace RestaurantForm
             InitializeComponent();
 
             selectedDishes = new List<Dish>();
-			fileRepo = new XmlRepository("dishes.dat");//new BinaryRepository("dishes.dat");
+			fileRepo = new ListRepository();//new BinaryRepository("dishes.dat");
             fileRepo.Add(new Dish("Кукруза", 12.6m));
             fileRepo.Add(new Dish("Картофель", 15.6m));
             fileRepo.Add(new Dish("Морковь", 14.6m));
@@ -33,6 +34,18 @@ namespace RestaurantForm
             label3.Text = fileRepo.GetDishes().ElementAt(0).Name;
             label4.Text = fileRepo.GetDishes().ElementAt(0).Price.ToString();
             currentDish = 0;
+        }
+
+
+        public void AddDish(Dish d)
+        {
+            fileRepo.Add(d);
+          
+        }
+
+        public void EditDish(Dish d)
+        {
+            fileRepo.Edit(d);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,6 +87,23 @@ namespace RestaurantForm
             {
                 MessageBox.Show("Блюдо " + d.Name);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DishForm dForm = new DishForm(this, null);
+            dForm.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DishForm dForm = new DishForm(this, fileRepo.GetDishes().ElementAt(currentDish));
+            dForm.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            fileRepo.Delete(fileRepo.GetDishes().ElementAt(currentDish));
         }
     }
 }

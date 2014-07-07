@@ -23,7 +23,7 @@ namespace RestaurantLib
 			using(BinaryReader br = new BinaryReader(File.Open(fileName, FileMode.OpenOrCreate)))
 			{
 				dishes = new Dishes();
-				while (br.BaseStream.Position < br.BaseStream.Length)
+				while (br.PeekChar()>-1)
 				{
 					var name = br.ReadString();
 					var price = br.ReadDecimal();
