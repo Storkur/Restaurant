@@ -91,13 +91,13 @@ namespace RestaurantForm
 
         private void button4_Click(object sender, EventArgs e)
         {
-            DishForm dForm = new DishForm(this, null);
+            DishForm dForm = new DishForm(this, Modes.Add);
             dForm.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            DishForm dForm = new DishForm(this, fileRepo.GetDishes().ElementAt(currentDish));
+            DishForm dForm = new DishForm(this, Modes.Edit, fileRepo.GetDishes().ElementAt(currentDish));
             dForm.Show();
         }
 
