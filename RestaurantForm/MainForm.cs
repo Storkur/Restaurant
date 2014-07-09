@@ -16,9 +16,10 @@ namespace RestaurantForm
     {
         int currentDish;
         //BinaryRepository fileRepo;
-		private IRepository fileRepo;
+		private IRepository repository;
 
         List<Dish> selectedDishes;
+		Dishes dishes;
 
         public MainForm()
         {
@@ -26,26 +27,27 @@ namespace RestaurantForm
             InitializeComponent();
 
             selectedDishes = new List<Dish>();
-			fileRepo = new ListRepository();//new BinaryRepository("dishes.dat");
-            fileRepo.Add(new Dish("Кукруза", 12.6m));
-            fileRepo.Add(new Dish("Картофель", 15.6m));
-            fileRepo.Add(new Dish("Морковь", 14.6m));
+			repository = new ListRepository();//new BinaryRepository("dishes.dat");
+            repository.Add(new Dish("Кукруза", 12.6m));
+            repository.Add(new Dish("Картофель", 15.6m));
+            repository.Add(new Dish("Морковь", 14.6m));
+			dishes = (Dishes)repository.GetDishes();
             //fileRepo.OpenFile();
-            label3.Text = fileRepo.GetDishes().ElementAt(0).Name;
-            label4.Text = fileRepo.GetDishes().ElementAt(0).Price.ToString();
+            label3.Text = dishes[0].Name;
+			label4.Text = dishes[0].Price.ToString();
             currentDish = 0;
         }
 
 
         public void AddDish(Dish d)
         {
-            fileRepo.Add(d);
+            repository.Add(d);
           
         }
 
         public void EditDish(Dish d)
         {
-            fileRepo.Edit(d);
+            repository.Edit(d);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,18 +55,18 @@ namespace RestaurantForm
             if (currentDish != 0)
             {
                 currentDish--;
-                label3.Text = fileRepo.GetDishes().ElementAt(currentDish).Name;
-                label4.Text = fileRepo.GetDishes().ElementAt(currentDish).Price.ToString();
+				label3.Text = dishes[currentDish].Name;
+                label4.Text = dishes[currentDish].Price.ToString();
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (currentDish != fileRepo.GetDishes().Count() - 1)
+            if (currentDish != repository.GetDishes().Count() - 1)
             {
                 currentDish++;
-                label3.Text = fileRepo.GetDishes().ElementAt(currentDish).Name;
-                label4.Text = fileRepo.GetDishes().ElementAt(currentDish).Price.ToString();
+                label3.Text = dishes[currentDish].Name;
+                label4.Text = dishes[currentDish].Price.ToString();
                 
             }
         }
@@ -73,15 +75,15 @@ namespace RestaurantForm
         {
             if (((CheckBox)sender).CheckState == CheckState.Checked)
             {
-                selectedDishes.Add(fileRepo.GetDishes().ElementAt(currentDish));
+                selectedDishes.Add(dishes[currentDish]);
             }
             else if (((CheckBox)sender).CheckState == CheckState.Unchecked)
             {
-                selectedDishes.Remove(fileRepo.GetDishes().ElementAt(currentDish));
+                selectedDishes.Remove(dishes[currentDish]);
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+		private void btnMenu_Click(object sender, EventArgs e)
         {
             foreach (Dish d in selectedDishes)
             {
@@ -89,21 +91,21 @@ namespace RestaurantForm
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+		private void btnAdd_Click(object sender, EventArgs e)
         {
             DishForm dForm = new DishForm(this, Modes.Add);
             dForm.Show();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+		private void btnEdit_Click(object sender, EventArgs e)
         {
-            DishForm dForm = new DishForm(this, Modes.Edit, fileRepo.GetDishes().ElementAt(currentDish));
+            DishForm dForm = new DishForm(this, Modes.Edit, dishes[currentDish]);
             dForm.Show();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+		private void btnRemove_Click(object sender, EventArgs e)
         {
-            fileRepo.Delete(fileRepo.GetDishes().ElementAt(currentDish));
+            repository.Delete(dishes[currentDish]);
         }
     }
 }
