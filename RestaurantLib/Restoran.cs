@@ -12,6 +12,13 @@ namespace RestaurantLib
 		private int timeBetweenClients = 2000;
 
 		List<Waiter> waiters;
+
+		public List<Waiter> Waiters
+		{
+			get { return waiters; }
+			private set { waiters = value; }
+		}
+
 		static Random rnd;
 
 		public IDisplay Display { get; set; }
@@ -30,9 +37,9 @@ namespace RestaurantLib
 
 		public void ShowDishes()
 		{
-			if (dishes != null)
+			if (Dishes != null)
 			{
-				foreach (Dish d in dishes)
+				foreach (Dish d in Dishes)
 				{
 					Display.Show(String.Format("Название: {0} -  Цена: {1}", d.Name, d.Price));
 				}
@@ -45,13 +52,14 @@ namespace RestaurantLib
 
 		public void Service()
 		{
-			if (!dishes.Any())
+			if (!Dishes.Any())
 			{
 				Console.WriteLine("Пустое меню! Обслуживание клиентов невозможно!");
 				return;
 			}
 			int i = 0;
 			while (i < 30)  //Для отладки
+
 			{
 				i++;
 				AddClient();
@@ -86,11 +94,11 @@ namespace RestaurantLib
 			while (!found)
 			{
 				//waiter1= waiters[rnd.Next(0, waiters.Count-1)];
-				for (int i = 0; i < cooks.Count; i++)
+				for (int i = 0; i < Cooks.Count; i++)
 				{
-					if (!cooks[i].Busy)
+					if (!Cooks[i].Busy)
 					{
-						cooks[i].MakeDish(order);
+						Cooks[i].MakeDish(order);
 						found = true;
 						break;
 					}
@@ -124,7 +132,7 @@ namespace RestaurantLib
 			{
 				Cook c = new Cook(Display);
 				c.Finished += Restoran_Finished;
-				cooks.Add(c);
+				Cooks.Add(c);
 
 			}
 		}
@@ -132,18 +140,18 @@ namespace RestaurantLib
 		public void AddClient()
 		{
 			Client client = new Client(Display);
-			clients.Add(client);
+			Clients.Add(client);
 
 			Display.Show(String.Format("Пришел клиент: № {0}", client.Id));
 			client.Ordered += TakeOrder;
 			client.Paid += client_Paid;
-			client.Order(dishes);
+			client.Order(Dishes);
 		}
 
 		public void RemoveClient(Client client)
 		{
 			Display.Show(String.Format("Ушел клиент: № {0}", client.Id));
-			clients.Remove(client);
+			Clients.Remove(client);
 		}
 	}
 
@@ -152,6 +160,25 @@ namespace RestaurantLib
 		protected List<Client> clients;
 		protected IEnumerable<Dish> dishes;
 		protected List<Cook> cooks;
+
+		public List<Client> Clients
+		{
+			get { return clients; }
+			private set { clients = value; }
+		}		
+
+		public IEnumerable<Dish> Dishes
+		{
+			get { return dishes; }
+			private set { dishes = value; }
+		}		
+
+		public List<Cook> Cooks
+		{
+			get { return cooks; }
+			private set { cooks = value; }
+		}
+
 		IRepository db;
 
 		public Eats(int numOfCooks, IRepository db)

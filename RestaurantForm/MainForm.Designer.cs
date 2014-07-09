@@ -40,6 +40,8 @@
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
+			this.btnStartRestourant = new System.Windows.Forms.Button();
+			this.btnWorkDynamics = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -166,11 +168,34 @@
 			this.btnRemove.UseVisualStyleBackColor = true;
 			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
 			// 
+			// btnStartRestourant
+			// 
+			this.btnStartRestourant.Location = new System.Drawing.Point(12, 281);
+			this.btnStartRestourant.Name = "btnStartRestourant";
+			this.btnStartRestourant.Size = new System.Drawing.Size(148, 23);
+			this.btnStartRestourant.TabIndex = 6;
+			this.btnStartRestourant.Text = "Начать работу ресторана";
+			this.btnStartRestourant.UseVisualStyleBackColor = true;
+			this.btnStartRestourant.Click += new System.EventHandler(this.btnStartRestourant_Click);
+			// 
+			// btnWorkDynamics
+			// 
+			this.btnWorkDynamics.Enabled = false;
+			this.btnWorkDynamics.Location = new System.Drawing.Point(167, 281);
+			this.btnWorkDynamics.Name = "btnWorkDynamics";
+			this.btnWorkDynamics.Size = new System.Drawing.Size(148, 23);
+			this.btnWorkDynamics.TabIndex = 7;
+			this.btnWorkDynamics.Text = "Динамика работы";
+			this.btnWorkDynamics.UseVisualStyleBackColor = true;
+			this.btnWorkDynamics.Click += new System.EventHandler(this.btnWorkDynamics_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(491, 330);
+			this.ClientSize = new System.Drawing.Size(509, 372);
+			this.Controls.Add(this.btnWorkDynamics);
+			this.Controls.Add(this.btnStartRestourant);
 			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.btnEdit);
 			this.Controls.Add(this.btnAdd);
@@ -198,6 +223,8 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnRemove;
+		private System.Windows.Forms.Button btnStartRestourant;
+		private System.Windows.Forms.Button btnWorkDynamics;
     }
 }
 

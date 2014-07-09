@@ -34,7 +34,7 @@ namespace RestaurantLib
 		public void Order(IEnumerable<Dish> dishes)
         {
             rnd = new Random();
-            int dishNum = rnd.Next(0, dishes.Count()-1);
+            int dishNum = rnd.Next(0, dishes.Count());
 			SelectedDish = dishes.ElementAt(dishNum);
 			Display.Show(String.Format("Клиент № {0} выбрал блюдо {1} \t {2}", Id, SelectedDish.Name, SelectedDish.Price));
 			WaitingOrder = false;

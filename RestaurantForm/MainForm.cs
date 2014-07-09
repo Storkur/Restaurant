@@ -20,6 +20,7 @@ namespace RestaurantForm
 
         List<Dish> selectedDishes;
 		Dishes dishes;
+		Restoran restoran;
 
         public MainForm()
         {
@@ -120,5 +121,21 @@ namespace RestaurantForm
 					currentDish--;
 			RefreshOutput();
         }
+
+		private void btnStartRestourant_Click(object sender, EventArgs e)
+		{
+			restoran = new Restoran(3, 3, repository);
+			Task.Factory.StartNew(() =>
+				{
+					restoran.Service();
+				});
+			btnWorkDynamics.Enabled = true;
+		}
+
+		private void btnWorkDynamics_Click(object sender, EventArgs e)
+		{
+			WorkDynamicsForm workDynamicsForm = new WorkDynamicsForm(restoran);
+			workDynamicsForm.Show();
+		}
 	}
 }
