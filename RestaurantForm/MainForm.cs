@@ -50,26 +50,34 @@ namespace RestaurantForm
             repository.Edit(d);
         }
 
+		public void RemoveDish(Dish dish)
+		{
+			repository.Delete(dish);
+		}
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (currentDish != 0)
             {
                 currentDish--;
-				label3.Text = dishes[currentDish].Name;
-                label4.Text = dishes[currentDish].Price.ToString();
+				RefreshOutput(); 
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (currentDish != repository.GetDishes().Count() - 1)
+            if (currentDish != dishes.Count() - 1)
             {
                 currentDish++;
-                label3.Text = dishes[currentDish].Name;
-                label4.Text = dishes[currentDish].Price.ToString();
-                
+				RefreshOutput();              
             }
         }
+
+		private void RefreshOutput()
+		{
+			label3.Text = dishes[currentDish].Name;
+			label4.Text = dishes[currentDish].Price.ToString();
+		}
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -94,18 +102,23 @@ namespace RestaurantForm
 		private void btnAdd_Click(object sender, EventArgs e)
         {
             DishForm dForm = new DishForm(this, Modes.Add);
-            dForm.Show();
+            dForm.ShowDialog();
+			RefreshOutput();
         }
 
 		private void btnEdit_Click(object sender, EventArgs e)
         {
             DishForm dForm = new DishForm(this, Modes.Edit, dishes[currentDish]);
-            dForm.Show();
+            dForm.ShowDialog();
+			RefreshOutput();
         }
 
 		private void btnRemove_Click(object sender, EventArgs e)
         {
             repository.Delete(dishes[currentDish]);
+			if(currentDish > 0)
+					currentDish--;
+			RefreshOutput();
         }
-    }
+	}
 }

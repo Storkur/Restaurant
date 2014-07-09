@@ -13,7 +13,12 @@ namespace RestaurantLib
 
 		public Dish this[int index]
 		{
-			get { return dishes[index]; }
+			get 
+			{
+				if (dishes.Any())
+					return dishes[index];
+				else return new Dish("", 0);
+			}
 			set { dishes[index] = value; }
 		}
 
@@ -40,8 +45,8 @@ namespace RestaurantLib
 
 		public void Edit(Dish dish)
 		{
-			Dish oldDish = dishes.Find(d => d.Name == dish.Name);
-			oldDish = dish;
+			int i = dishes.FindIndex(d => d.Name == dish.Name);
+			dishes[i] = dish;
 		}
 
         IEnumerator<Dish> IEnumerable<Dish>.GetEnumerator()
