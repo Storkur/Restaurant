@@ -41,12 +41,12 @@ namespace RestaurantLib
 
 		public void Delete(Dish dish)
 		{
-			throw new NotImplementedException();
+			dishes.Remove(dish);
 		}
 
 		public void Edit(Dish dish)
 		{
-			throw new NotImplementedException();
+			dishes.Edit(dish);
 		}
 
 		public void Save()

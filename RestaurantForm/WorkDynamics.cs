@@ -15,13 +15,28 @@ namespace RestaurantForm
 	public partial class WorkDynamicsForm : Form
 	{
 		private Restoran restoran;
+		private bool vizualizeFlag = true;
 		public WorkDynamicsForm(Restoran restoran)
 		{
 			InitializeComponent();
 
 			this.restoran = restoran;
 			SetupRestoranDataGrid();
+			StartVisualize();
+		}
+
+		private void StartVisualize()
+		{
 			Visualize();
+			Task.Factory.StartNew(() =>
+			{
+				while (vizualizeFlag)
+				{
+					this.Invoke(new MethodInvoker(Visualize));
+					Thread.Sleep(500);
+				}
+				this.Invoke(new MethodInvoker(Close));
+			});
 		}
 
 		private void SetupRestoranDataGrid()
@@ -66,6 +81,16 @@ namespace RestaurantForm
 				value += " \nDishReady " + c.DishReady;
 				RestoranDataGrid.Rows[i].Cells[2].Value = value;
 			}
+		}
+
+		private void WorkDynamicsForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (vizualizeFlag)
+			{
+				e.Cancel = true;
+				vizualizeFlag = false;
+			}
+			
 		}
 	}
 }

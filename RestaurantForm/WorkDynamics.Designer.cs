@@ -60,6 +60,7 @@
 			this.Controls.Add(this.RestoranDataGrid);
 			this.Name = "WorkDynamicsForm";
 			this.Text = "WorkDynamics";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WorkDynamicsForm_FormClosing);
 			((System.ComponentModel.ISupportInitialize)(this.RestoranDataGrid)).EndInit();
 			this.ResumeLayout(false);
 
